@@ -11,13 +11,13 @@ from io import open as iopen
 reddit = praw.Reddit()
 
 subreddit = reddit.subreddit('blurrypicturesofcats')
-posts = subreddit.new(limit=10)
+posts = subreddit.top(limit=100)
 
 for post in posts:
   print(post.url)
   file_url = post.url
   if file_url[-3:] != "jpg":
-      print("uh oh")
+      print("Not an image")
 
   else:
       suffix_list = ['jpg', 'gif', 'png', 'tif', 'svg', ]
