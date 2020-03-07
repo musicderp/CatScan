@@ -36,6 +36,7 @@ print("[INFO] text detection took {:.6f} seconds".format(end - start))
 (numRows, numCols) = scores.shape[2:4]
 rects = []
 confidences = []
+print(confidences)
 
 for y in range(0, numRows):
 
@@ -48,39 +49,40 @@ for y in range(0, numRows):
 
 
 
-print(scoresData)
-for x in range(0, numCols):
 
-    if scoresData[x] < 0.00000002:
-        continue
+    for x in range(0, numCols):
 
-    (offsetX, offsetY) = (x * 4.0, y * 4.0)
+        if scoresData[x] < .5:
+            continue
 
-    angle = anglesData[x]
-    cos = np.cos(angle)
-    sin = np.sin(angle)
+        (offsetX, offsetY) = (x * 4.0, y * 4.0)
 
-    h = xData0[x] + xData2[x]
-    w = xData1[x] + xData3[x]
+        angle = anglesData[x]
+        cos = np.cos(angle)
+        sin = np.sin(angle)
 
-    endX = int(offsetX + (cos * xData1[x]) + (sin * xData2[x]))
-    endY = int(offsetY - (sin * xData1[x]) + (cos * xData2[x]))
-    startX = int(endX - w)
-    startY = int(endY - h)
+        h = xData0[x] + xData2[x]
+        w = xData1[x] + xData3[x]
 
-    rects.append((startX, startY, endX, endY))
-    confidences.append(scoresData[x])
+        endX = int(offsetX + (cos * xData1[x]) + (sin * xData2[x]))
+        endY = int(offsetY - (sin * xData1[x]) + (cos * xData2[x]))
+        startX = int(endX - w)
+        startY = int(endY - h)
 
-    boxes = non_max_suppression(np.array(rects), probs=confidences)
+        rects.append((startX, startY, endX, endY))
+        confidences.append(scoresData[x])
 
-    for (startX, startY, endX, endY) in boxes:
+boxes = non_max_suppression(np.array(rects), probs=confidences)
+print(boxes)
 
-        startX = int(startX * rW)
-        startY = int(startY * rH)
-        endX = int(endX * rW)
-        endY = int(endY * rH)
+for (startX, startY, endX, endY) in boxes:
 
-        cv2.rectangle(orig, (startX, startY), (endX, endY), (0, 255, 0), 2)
+    startX = int(startX * rW)
+    startY = int(startY * rH)
+    endX = int(endX * rW)
+    endY = int(endY * rH)
 
-    cv2.imshow("Text Detection", orig)
-    cv2.waitKey(0)
+    cv2.rectangle(orig, (startX, startY), (endX, endY), (0, 255, 0), 2)
+
+cv2.imshow("Text Detection", orig)
+cv2.waitKey(0)
