@@ -11,7 +11,7 @@ from io import open as iopen
 reddit = praw.Reddit()
 
 subreddit = reddit.subreddit('blurrypicturesofcats')
-posts = subreddit.top(limit=100)
+posts = subreddit.top(limit=10)
 
 for post in posts:
   print(post.url)
