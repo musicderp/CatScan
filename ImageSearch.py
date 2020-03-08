@@ -10,7 +10,7 @@ print("[INFO] loading VP-Tree and hashes...")
 tree = pickle.loads(open('hashes/tree.pickle', "rb").read())
 hashes = pickle.loads(open('hashes/hashes.pickle', "rb").read())
 
-image = cv2.imread('images/raw/vh6ny97uocl41.jpg')
+image = cv2.imread('')
 cv2.imshow("Query", image)
 
 queryHash = dhash(image)
