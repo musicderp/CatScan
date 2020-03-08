@@ -7,7 +7,7 @@ import requests
 reddit = praw.Reddit()
 
 subreddit = reddit.subreddit('blurrypicturesofcats')
-posts = subreddit.new(limit=40)
+posts = subreddit.top(limit=100)
 
 filename = "urls.txt"
 f = open(filename, 'r+')

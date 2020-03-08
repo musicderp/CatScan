@@ -3,7 +3,8 @@ import numpy as np
 import time
 import cv2
 import os
-# for every file in directory, does text detection. if text is found, image deleted. if text is not, moved to /images/processed/
+# for every file in directory, does text detection. if text is found, image deleted. if text is not,
+# moved to /images/processed/
 directory = 'images/raw'
 for filename in os.listdir(directory):
     path = os.path.join(directory, filename)
