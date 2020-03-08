@@ -34,6 +34,7 @@ f = open('hashes/tree.pickle', "wb")
 f.write(pickle.dumps(tree))
 f.close()
 
+
 print("[INFO] serializing hashes...")
 f = open('hashes/hashes.pickle', "wb")
 f.write(pickle.dumps(hashes))
