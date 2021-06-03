@@ -12,6 +12,6 @@ pytz==2019.3
 requests==2.23.0
 six==1.14.0
 update-checker==0.16
-urllib3==1.25.8
+urllib3==1.26.5
 vptree==1.2
 websocket-client==0.57.0
